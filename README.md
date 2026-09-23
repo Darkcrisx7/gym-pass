@@ -98,7 +98,8 @@ the UI instead.)
 
 | Variable | Required | Notes |
 |---|---|---|
-| `DATABASE_URL` | Yes | Your Postgres/Supabase connection string. |
+| `DATABASE_URL` | Yes | Your Postgres/Supabase connection string — use the **pooled** ("Transaction pooler") one. |
+| `DIRECT_URL` | Yes | The **direct** (non-pooled, port 5432) connection string to the same database. Only used for creating/updating tables — see §5. |
 | `SESSION_SECRET` | Yes | Long random string that signs session cookies. Generate one with `openssl rand -base64 48`. |
 | `NEXT_PUBLIC_APP_URL` | Yes | Used to build the absolute card URL that gets encoded in the QR. Set to your real domain in production. |
 | `SUPER_ADMIN_EMAILS` | No | Comma-separated emails allowed to view `/admin`. |
@@ -106,11 +107,23 @@ the UI instead.)
 ## 5. Database setup
 
 The schema is configured for Postgres out of the box (Supabase, Neon, or
-any Postgres host all work). Create a database, copy its connection
-string into `DATABASE_URL`, and you're set — the `build` script
-(`prisma db push && next build`) creates or updates the tables to match
-the schema automatically on every deploy, so you never have to run a
-migration command by hand. If you later want to switch to a stricter,
+any Postgres host all work). It needs **two** connection strings:
+
+- `DATABASE_URL` — the **pooled** connection (Supabase calls this the
+  "Transaction pooler," port 6543). The running app uses this for every
+  normal query. Add `?pgbouncer=true&connection_limit=1` to the end of it.
+- `DIRECT_URL` — the **direct** connection (port 5432, no pooler). Used
+  *only* by `prisma db push` when creating/updating tables — pooled
+  connections can't run schema changes, so without this the build hangs
+  indefinitely trying to create tables through the pooler.
+
+Both are in Supabase's "Connect" panel (Project → Connect button) — pick
+"Direct connection" for one and "Transaction pooler" for the other, on
+the same page.
+
+The `build` script (`prisma db push && next build`) uses `DIRECT_URL`
+automatically to create/update the tables on every deploy — you never
+have to run a migration command by hand. If you later want a stricter,
 versioned migration workflow instead of this auto-push, swap that script
 step for `prisma migrate deploy` and manage migrations with
 `npx prisma migrate dev` from a machine with Node.js.
