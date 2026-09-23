@@ -1,0 +1,122 @@
+// GYM PASS — database schema.
+// Configured for Postgres/Supabase. DATABASE_URL comes from your Supabase
+// project's connection string (Settings → Database).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// One row per gym. Every other tenant-scoped table carries gymId and every
+// query in the app is expected to filter by it — see src/lib/tenant.ts.
+model Gym {
+  id             String   @id @default(cuid())
+  name           String
+  address        String?
+  contactNumber  String?
+  whatsapp       String?
+  logoUrl        String?
+  primaryColor   String   @default("#D8A945")
+  secondaryColor String   @default("#0F1A16")
+  timezone       String   @default("Asia/Kolkata")
+  expiringSoonDays Int    @default(7)
+  isDemo         Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  users    User[]
+  members  Member[]
+}
+
+enum Role {
+  OWNER
+  STAFF
+}
+
+// A login for a gym: either the owner or a staff member. Kept separate from
+// Member (a member never logs in — they only hold a shareable card link).
+model User {
+  id           String   @id @default(cuid())
+  gymId        String
+  gym          Gym      @relation(fields: [gymId], references: [id], onDelete: Cascade)
+  name         String
+  email        String   @unique
+  mobile       String?
+  passwordHash String
+  role         Role     @default(OWNER)
+  createdAt    DateTime @default(now())
+
+  @@index([gymId])
+}
+
+enum PaymentStatus {
+  PAID
+  PENDING
+  PARTIAL
+}
+
+// A gym member. Holds the CURRENT membership snapshot directly (plan, dates,
+// status) so the digital card is a single fast read; renewals additionally
+// append to MembershipRenewal so history is never lost.
+model Member {
+  id          String   @id @default(cuid())
+  gymId       String
+  gym         Gym      @relation(fields: [gymId], references: [id], onDelete: Cascade)
+  memberCode  String   // e.g. GYM-0001, unique within a gym, not globally
+  cardToken   String   @unique // opaque, unguessable — the only thing the QR encodes
+
+  fullName    String
+  photoUrl    String?
+  mobile      String
+  email       String?
+  dob         DateTime?
+  gender      String?
+
+  emergencyName     String?
+  emergencyNumber   String?
+  emergencyRelation String?
+
+  plan          String
+  startDate     DateTime
+  expiryDate    DateTime
+  amountPaid    Float
+  paymentStatus PaymentStatus @default(PAID)
+  notes         String?
+
+  isActive      Boolean  @default(true) // manual deactivate, independent of expiry
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  renewals MembershipRenewal[]
+
+  @@unique([gymId, memberCode])
+  @@index([gymId])
+  @@index([gymId, mobile])
+}
+
+// One immutable row per membership period the member has ever had —
+// created on signup (the first period) and again on every renewal.
+model MembershipRenewal {
+  id            String   @id @default(cuid())
+  gymId         String
+  memberId      String
+  member        Member   @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  plan          String
+  durationLabel String
+  startDate     DateTime
+  endDate       DateTime
+  amount        Float
+  paymentStatus PaymentStatus @default(PAID)
+  notes         String?
+
+  createdAt DateTime @default(now())
+
+  @@index([gymId])
+  @@index([memberId])
+}

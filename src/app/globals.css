@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  border-color: rgba(243, 240, 230, 0.08);
+}
+
+body {
+  min-height: 100dvh;
+}
+
+::selection {
+  background: #d8a945;
+  color: #0f1a16;
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn-primary {
+    @apply btn bg-gold text-ink hover:bg-goldSoft;
+  }
+  .btn-ghost {
+    @apply btn border border-paper/15 text-paper hover:border-paper/40;
+  }
+  .btn-danger {
+    @apply btn bg-expired/90 text-paper hover:bg-expired;
+  }
+  .field-label {
+    @apply block text-sm text-muted mb-1.5;
+  }
+  .field-input {
+    @apply w-full rounded-xl bg-surface border border-paper/10 px-3.5 py-2.5 text-paper placeholder:text-muted/70 outline-none focus:border-gold/60 focus:ring-1 focus:ring-gold/40;
+  }
+  .panel {
+    @apply rounded-card border border-paper/10 bg-surface shadow-card;
+  }
+  .status-pill {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium;
+  }
+}

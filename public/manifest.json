@@ -1,0 +1,10 @@
+{
+  "name": "Gym Pass",
+  "short_name": "Gym Pass",
+  "description": "Digital gym membership cards",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F1A16",
+  "theme_color": "#0F1A16",
+  "icons": []
+}
