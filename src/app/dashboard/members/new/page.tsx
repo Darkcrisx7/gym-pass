@@ -4,10 +4,12 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { DURATIONS } from "@/lib/membership";
+import PhotoPicker from "@/components/PhotoPicker";
 
 export default function NewMemberPage() {
   const router = useRouter();
   const [duration, setDuration] = useState("3m");
+  const [photoUrl, setPhotoUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -16,7 +18,7 @@ export default function NewMemberPage() {
     setError(null);
     setLoading(true);
     const form = new FormData(e.currentTarget);
-    const body = Object.fromEntries(form.entries());
+    const body = { ...Object.fromEntries(form.entries()), photoUrl };
 
     const res = await fetch("/api/members", {
       method: "POST",
@@ -46,6 +48,9 @@ export default function NewMemberPage() {
       <form onSubmit={onSubmit} className="mt-8 space-y-10">
         <section>
           <h2 className="text-sm font-medium text-muted">Personal information</h2>
+          <div className="mt-4">
+            <PhotoPicker value={photoUrl} onChange={setPhotoUrl} fallbackLetter="+" />
+          </div>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             <div className="sm:col-span-2">
               <label className="field-label" htmlFor="fullName">

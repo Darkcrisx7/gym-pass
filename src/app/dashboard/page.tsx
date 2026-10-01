@@ -61,10 +61,10 @@ export default async function DashboardOverview() {
           </div>
         </div>
         <div className="flex gap-3">
-          <Link href="/dashboard/scan" className="btn-ghost">
+          <Link href="/dashboard/scan" className="btn-ghost btn-glow">
             Scan Card
           </Link>
-          <Link href="/dashboard/members/new" className="btn-primary">
+          <Link href="/dashboard/members/new" className="btn-primary btn-glow">
             Add member
           </Link>
         </div>

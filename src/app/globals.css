@@ -43,4 +43,51 @@ body {
   .icon-badge {
     @apply flex h-10 w-10 items-center justify-center rounded-xl;
   }
+
+  /* Animated gradient-glow button — a blurred, slowly rotating rainbow halo
+     that fades in on hover/focus and intensifies on press. Applied on top
+     of .btn-primary / .btn-ghost, which supply the actual button look. */
+  .btn-glow {
+    position: relative;
+    isolation: isolate;
+  }
+  .btn-glow::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    z-index: -1;
+    border-radius: inherit;
+    background: conic-gradient(
+      from 0deg,
+      #2f6fed,
+      #a855f7,
+      #ec4899,
+      #f59e0b,
+      #22c55e,
+      #2f6fed
+    );
+    filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    animation: btn-glow-spin 3.5s linear infinite;
+  }
+  .btn-glow:hover::before,
+  .btn-glow:focus-visible::before {
+    opacity: 0.85;
+  }
+  .btn-glow:active::before {
+    opacity: 1;
+    filter: blur(14px);
+  }
 }
+
+@keyframes btn-glow-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-glow::before {
+    animation: none;
+  }

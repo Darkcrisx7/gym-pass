@@ -4,6 +4,7 @@ import { requireSession } from "@/lib/requireSession";
 import { prisma } from "@/lib/db";
 import { computeStatus } from "@/lib/membership";
 import MembershipCardPreview from "@/components/MembershipCardPreview";
+import MemberPhotoEditor from "@/components/MemberPhotoEditor";
 import RenewMemberForm from "@/components/RenewMemberForm";
 import MemberActions from "@/components/MemberActions";
 import ShareCardButton from "@/components/ShareCardButton";
@@ -40,6 +41,13 @@ export default async function MemberDetailPage({ params }: { params: { id: strin
 
       <div className="mt-6 grid gap-8 lg:grid-cols-[320px_1fr]">
         <div>
+          <div className="mb-4">
+            <MemberPhotoEditor
+              memberId={member.id}
+              currentPhotoUrl={member.photoUrl}
+              fallbackLetter={member.fullName.slice(0, 1).toUpperCase()}
+            />
+          </div>
           <MembershipCardPreview
             gymName={gym.name}
             gymLogoUrl={gym.logoUrl}

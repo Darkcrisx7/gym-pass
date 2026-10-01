@@ -7,6 +7,7 @@ const UpdateSchema = z.object({
   fullName: z.string().trim().min(1).optional(),
   mobile: z.string().trim().min(6).optional(),
   email: z.string().trim().email().optional().or(z.literal("")),
+  photoUrl: z.string().max(400000).optional().nullable(),
   notes: z.string().optional(),
   paymentStatus: z.enum(["PAID", "PENDING", "PARTIAL"]).optional(),
   isActive: z.boolean().optional(),

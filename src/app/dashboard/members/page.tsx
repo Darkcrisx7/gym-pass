@@ -49,7 +49,7 @@ export default async function MembersPage({
     <div className="px-6 py-8 lg:px-10">
       <div className="flex items-center justify-between gap-4">
         <h1 className="text-xl font-bold tracking-tight">Members</h1>
-        <Link href="/dashboard/members/new" className="btn-primary">
+        <Link href="/dashboard/members/new" className="btn-primary btn-glow">
           + Add member
         </Link>
       </div>
