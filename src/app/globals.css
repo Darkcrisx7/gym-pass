@@ -44,19 +44,19 @@ body {
     @apply flex h-10 w-10 items-center justify-center rounded-xl;
   }
 
-  /* Animated gradient-glow button — a blurred, slowly rotating rainbow halo
-     that fades in on hover/focus and intensifies on press. Applied on top
-     of .btn-primary / .btn-ghost, which supply the actual button look. */
+  /* Animated gradient-border button — a thin rotating rainbow ring that
+     hugs the button's exact edge (via mask-composite, not a blurred blob),
+     plus a soft ambient shadow on hover/press for a touch of glow. */
   .btn-glow {
     position: relative;
-    isolation: isolate;
   }
   .btn-glow::before {
     content: "";
     position: absolute;
-    inset: -3px;
+    inset: -2px;
     z-index: -1;
     border-radius: inherit;
+    padding: 2px;
     background: conic-gradient(
       from 0deg,
       #2f6fed,
@@ -66,18 +66,24 @@ body {
       #22c55e,
       #2f6fed
     );
-    filter: blur(10px);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
     opacity: 0;
-    transition: opacity 0.35s ease;
-    animation: btn-glow-spin 3.5s linear infinite;
+    transition: opacity 0.25s ease;
+    animation: btn-glow-spin 3s linear infinite;
   }
   .btn-glow:hover::before,
-  .btn-glow:focus-visible::before {
-    opacity: 0.85;
-  }
+  .btn-glow:focus-visible::before,
   .btn-glow:active::before {
     opacity: 1;
-    filter: blur(14px);
+  }
+  .btn-glow:hover,
+  .btn-glow:focus-visible {
+    box-shadow: 0 6px 20px -6px rgba(47, 111, 237, 0.4);
+  }
+  .btn-glow:active {
+    box-shadow: 0 4px 14px -4px rgba(47, 111, 237, 0.55);
   }
 }
 
