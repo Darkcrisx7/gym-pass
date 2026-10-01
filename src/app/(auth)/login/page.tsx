@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import GymPassLogo from "@/components/GymPassLogo";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -35,10 +36,10 @@ export default function LoginPage() {
 
   return (
     <main className="mx-auto flex min-h-dvh max-w-md flex-col justify-center px-6 py-16">
-      <Link href="/" className="font-display text-lg font-semibold">
-        Gym Pass
+      <Link href="/">
+        <GymPassLogo />
       </Link>
-      <h1 className="mt-6 font-display text-2xl font-semibold">Log in</h1>
+      <h1 className="mt-6 font-bold text-2xl">Log in</h1>
       <p className="mt-1.5 text-sm text-muted">Owner and staff accounts both log in here.</p>
 
       <form onSubmit={onSubmit} className="mt-8 space-y-4">
@@ -64,14 +65,14 @@ export default function LoginPage() {
 
       <p className="mt-6 text-center text-sm text-muted">
         New here?{" "}
-        <Link href="/signup" className="text-paper underline underline-offset-4">
+        <Link href="/signup" className="text-text underline underline-offset-4">
           Create a gym
         </Link>
       </p>
-      <p className="mt-8 rounded-xl border border-paper/10 bg-surface p-4 text-xs leading-relaxed text-muted">
-        Demo gym: <span className="text-paper">demo@gympass.app</span> / password{" "}
-        <span className="text-paper">demo1234</span> — seeded with sample members. Run{" "}
-        <code className="text-paper">npm run db:seed</code> to create it.
+      <p className="mt-8 rounded-xl border border-border bg-surface p-4 text-xs leading-relaxed text-muted">
+        Demo gym: <span className="text-text">demo@gympass.app</span> / password{" "}
+        <span className="text-text">demo1234</span> — seeded with sample members. Run{" "}
+        <code className="text-text">npm run db:seed</code> to create it.
       </p>
     </main>
   );

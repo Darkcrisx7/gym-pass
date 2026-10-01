@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import MembershipCardPreview from "@/components/MembershipCardPreview";
+import GymPassLogo from "@/components/GymPassLogo";
 
 export default async function LandingPage() {
   const session = await getSession();
@@ -10,9 +11,7 @@ export default async function LandingPage() {
   return (
     <main>
       <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-        <span className="font-display text-lg font-semibold tracking-tight">
-          Gym Pass
-        </span>
+        <GymPassLogo />
         <nav className="flex items-center gap-3">
           <Link href="/login" className="btn-ghost">
             Log in
@@ -26,7 +25,7 @@ export default async function LandingPage() {
       {/* HERO */}
       <section className="mx-auto grid max-w-6xl items-center gap-14 px-6 py-16 md:grid-cols-2 md:py-24">
         <div>
-          <h1 className="font-display text-4xl font-semibold leading-[1.08] md:text-5xl">
+          <h1 className="font-bold text-4xl leading-[1.08] md:text-5xl">
             Turn your gym membership into a digital card.
           </h1>
           <p className="mt-6 max-w-md text-lg text-muted">
@@ -62,9 +61,9 @@ export default async function LandingPage() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section id="how-it-works" className="border-t border-paper/10 bg-surface/40">
+      <section id="how-it-works" className="border-t border-border bg-surface/40">
         <div className="mx-auto max-w-6xl px-6 py-20">
-          <h2 className="font-display text-3xl font-semibold">How it works</h2>
+          <h2 className="font-bold text-3xl">How it works</h2>
           <div className="mt-12 grid gap-10 md:grid-cols-3">
             {[
               {
@@ -84,7 +83,7 @@ export default async function LandingPage() {
               },
             ].map((s) => (
               <div key={s.n}>
-                <div className="font-display text-2xl text-gold">{s.n}</div>
+                <div className="font-bold text-2xl text-accent">{s.n}</div>
                 <h3 className="mt-3 text-lg font-medium">{s.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{s.body}</p>
               </div>
@@ -95,7 +94,7 @@ export default async function LandingPage() {
 
       {/* FEATURES */}
       <section className="mx-auto max-w-6xl px-6 py-20">
-        <h2 className="font-display text-3xl font-semibold">
+        <h2 className="font-bold text-3xl">
           Everything a membership desk actually needs
         </h2>
         <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -134,10 +133,10 @@ export default async function LandingPage() {
       </section>
 
       {/* VERIFICATION DEMO */}
-      <section className="border-t border-paper/10 bg-surface/40">
+      <section className="border-t border-border bg-surface/40">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-2">
           <div>
-            <h2 className="font-display text-3xl font-semibold">
+            <h2 className="font-bold text-3xl">
               A scan answers one question, clearly.
             </h2>
             <p className="mt-4 max-w-md text-muted">
@@ -167,7 +166,7 @@ export default async function LandingPage() {
             <div className="mx-auto h-12 w-12 rounded-full bg-active/15 text-active flex items-center justify-center text-xl">
               ✓
             </div>
-            <p className="mt-4 font-display text-xl">Membership active</p>
+            <p className="mt-4 font-bold text-xl">Membership active</p>
             <p className="mt-1 text-sm text-muted">Rahul Kumar · PF-0142</p>
             <p className="mt-1 text-xs text-muted">Valid until 21 Dec 2026</p>
           </div>
@@ -176,7 +175,7 @@ export default async function LandingPage() {
 
       {/* CTA */}
       <section className="mx-auto max-w-6xl px-6 py-24 text-center">
-        <h2 className="font-display text-3xl font-semibold md:text-4xl">
+        <h2 className="font-bold text-3xl md:text-4xl">
           Set your members up with a card in minutes.
         </h2>
         <div className="mt-8">
@@ -187,9 +186,9 @@ export default async function LandingPage() {
       </section>
 
       {/* FAQ */}
-      <section className="border-t border-paper/10">
+      <section className="border-t border-border">
         <div className="mx-auto max-w-3xl px-6 py-20">
-          <h2 className="font-display text-2xl font-semibold">Questions</h2>
+          <h2 className="font-bold text-2xl">Questions</h2>
           <div className="mt-8 space-y-6">
             {[
               {
@@ -218,7 +217,7 @@ export default async function LandingPage() {
         </div>
       </section>
 
-      <footer className="border-t border-paper/10 px-6 py-10 text-center text-sm text-muted">
+      <footer className="border-t border-border px-6 py-10 text-center text-sm text-muted">
         Gym Pass
       </footer>
     </main>

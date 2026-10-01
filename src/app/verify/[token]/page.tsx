@@ -61,7 +61,7 @@ function Result({
       </div>
       <div className="mt-4 flex items-center gap-2">
         {dot && <span className={`h-2 w-2 rounded-full ${dot}`} />}
-        <h1 className="font-display text-xl">{title}</h1>
+        <h1 className="font-bold text-xl">{title}</h1>
       </div>
       <p className="mt-1.5 text-sm text-muted">{subtitle}</p>
       {cardToken && (

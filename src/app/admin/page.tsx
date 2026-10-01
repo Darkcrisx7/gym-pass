@@ -31,12 +31,12 @@ export default async function AdminPage() {
 
   return (
     <div className="mx-auto max-w-4xl px-6 py-10">
-      <h1 className="font-display text-2xl font-semibold">Platform admin</h1>
+      <h1 className="font-bold text-2xl">Platform admin</h1>
       <p className="mt-1.5 text-sm text-muted">
         Every gym on Gym Pass. Deactivation, plans, and billing are future work —
         this is a read-only view for now.
       </p>
-      <ul className="mt-8 divide-y divide-paper/10 rounded-card border border-paper/10">
+      <ul className="mt-8 divide-y divide-border rounded-card border border-border">
         {gyms.map((g) => (
           <li key={g.id} className="flex items-center justify-between px-5 py-4 text-sm">
             <div>
@@ -46,7 +46,7 @@ export default async function AdminPage() {
                 {g.createdAt.toLocaleDateString("en-IN")}
               </p>
             </div>
-            {g.isDemo && <span className="status-pill bg-ink text-muted">Demo</span>}
+            {g.isDemo && <span className="status-pill bg-inactiveSoft text-inactive">Demo</span>}
           </li>
         ))}
       </ul>

@@ -3,11 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
-}
-
-* {
-  border-color: rgba(243, 240, 230, 0.08);
+  color-scheme: light;
 }
 
 body {
@@ -15,33 +11,36 @@ body {
 }
 
 ::selection {
-  background: #d8a945;
-  color: #0f1a16;
+  background: #2f6fed;
+  color: #fff;
 }
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none;
   }
   .btn-primary {
-    @apply btn bg-gold text-ink hover:bg-goldSoft;
+    @apply btn bg-accent text-white hover:bg-accent/90 shadow-sm;
   }
   .btn-ghost {
-    @apply btn border border-paper/15 text-paper hover:border-paper/40;
+    @apply btn border border-border bg-surface text-text hover:bg-bg;
   }
   .btn-danger {
-    @apply btn bg-expired/90 text-paper hover:bg-expired;
+    @apply btn bg-expired text-white hover:bg-expired/90;
   }
   .field-label {
     @apply block text-sm text-muted mb-1.5;
   }
   .field-input {
-    @apply w-full rounded-xl bg-surface border border-paper/10 px-3.5 py-2.5 text-paper placeholder:text-muted/70 outline-none focus:border-gold/60 focus:ring-1 focus:ring-gold/40;
+    @apply w-full rounded-xl bg-surface border border-border px-3.5 py-2.5 text-text placeholder:text-muted/70 outline-none focus:border-accent focus:ring-2 focus:ring-accent/15;
   }
   .panel {
-    @apply rounded-card border border-paper/10 bg-surface shadow-card;
+    @apply rounded-card border border-border bg-surface shadow-panel;
   }
   .status-pill {
     @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium;
+  }
+  .icon-badge {
+    @apply flex h-10 w-10 items-center justify-center rounded-xl;
   }
 }

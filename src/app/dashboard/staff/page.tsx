@@ -12,7 +12,7 @@ export default async function StaffPage() {
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-10">
-      <h1 className="font-display text-2xl font-semibold">Staff</h1>
+      <h1 className="font-bold text-2xl">Staff</h1>
       <p className="mt-1.5 text-sm text-muted">
         Staff can scan cards and search members. They can't edit members, manage
         billing, or change gym settings.
@@ -28,7 +28,7 @@ export default async function StaffPage() {
         {staff.length === 0 ? (
           <p className="mt-2 text-sm text-muted">No staff accounts yet.</p>
         ) : (
-          <ul className="mt-3 divide-y divide-paper/10 rounded-card border border-paper/10">
+          <ul className="mt-3 divide-y divide-border rounded-card border border-border">
             {staff.map((s) => (
               <li key={s.id} className="flex items-center justify-between px-5 py-3.5 text-sm">
                 <div>

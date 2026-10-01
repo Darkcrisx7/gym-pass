@@ -8,7 +8,7 @@ export default async function SettingsPage() {
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-10">
-      <h1 className="font-display text-2xl font-semibold">Gym settings</h1>
+      <h1 className="font-bold text-2xl">Gym settings</h1>
       <p className="mt-1.5 text-sm text-muted">
         These details appear on every member's digital card.
       </p>

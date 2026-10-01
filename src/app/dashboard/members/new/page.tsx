@@ -38,10 +38,10 @@ export default function NewMemberPage() {
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-10">
-      <Link href="/dashboard/members" className="text-sm text-muted hover:text-paper">
+      <Link href="/dashboard/members" className="text-sm text-muted hover:text-text">
         ← Members
       </Link>
-      <h1 className="mt-3 font-display text-2xl font-semibold">Add member</h1>
+      <h1 className="mt-3 font-bold text-2xl">Add member</h1>
 
       <form onSubmit={onSubmit} className="mt-8 space-y-10">
         <section>

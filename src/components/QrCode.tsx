@@ -6,8 +6,8 @@ import QRCode from "qrcode";
 export default function QrCode({
   value,
   size = 120,
-  fgColor = "#0F1A16",
-  bgColor = "#F3F0E6",
+  fgColor = "#121826",
+  bgColor = "#FFFFFF",
 }: {
   value: string;
   size?: number;

@@ -129,7 +129,7 @@ export default function ScannerClient() {
       <div
         id="qr-reader"
         ref={containerRef}
-        className="overflow-hidden rounded-card border border-paper/10 bg-surface"
+        className="overflow-hidden rounded-card border border-border bg-surface"
       />
 
       {result.state === "camera-error" && (
@@ -167,7 +167,7 @@ function ResultPanel({
     <div className="mt-4 panel p-6">
       <div className="flex items-center gap-2.5">
         <span className={`h-2.5 w-2.5 rounded-full ${copy.dot}`} />
-        <p className={`font-display text-lg ${copy.tone}`}>{copy.label}</p>
+        <p className={`font-bold text-lg ${copy.tone}`}>{copy.label}</p>
       </div>
 
       <div className="mt-5 flex items-center gap-3">
@@ -175,7 +175,7 @@ function ResultPanel({
           // eslint-disable-next-line @next/next/no-img-element
           <img src={member.photoUrl} alt="" className="h-12 w-12 rounded-full object-cover" />
         ) : (
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-ink font-display">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-bg border border-border font-bold text-muted">
             {member.fullName.slice(0, 1).toUpperCase()}
           </div>
         )}
@@ -203,7 +203,7 @@ function ResultPanel({
         )}
       </dl>
       {member.notes && (
-        <p className="mt-4 rounded-xl bg-ink p-3 text-xs text-muted">{member.notes}</p>
+        <p className="mt-4 rounded-xl bg-bg border border-border p-3 text-xs text-muted">{member.notes}</p>
       )}
     </div>
   );

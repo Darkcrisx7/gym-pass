@@ -19,7 +19,7 @@ export default async function PublicCardPage({ params }: { params: { token: stri
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-expired/15 text-expired">
           !
         </div>
-        <h1 className="mt-4 font-display text-xl">Card not found</h1>
+        <h1 className="mt-4 font-bold text-xl">Card not found</h1>
         <p className="mt-1.5 text-sm text-muted">
           This membership card link is invalid or no longer exists.
         </p>

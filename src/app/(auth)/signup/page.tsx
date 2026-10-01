@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import GymPassLogo from "@/components/GymPassLogo";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -35,10 +36,10 @@ export default function SignupPage() {
 
   return (
     <main className="mx-auto flex min-h-dvh max-w-md flex-col justify-center px-6 py-16">
-      <Link href="/" className="font-display text-lg font-semibold">
-        Gym Pass
+      <Link href="/">
+        <GymPassLogo />
       </Link>
-      <h1 className="mt-6 font-display text-2xl font-semibold">Create your gym</h1>
+      <h1 className="mt-6 font-bold text-2xl">Create your gym</h1>
       <p className="mt-1.5 text-sm text-muted">
         Set up your workspace, then start issuing digital cards.
       </p>
@@ -100,7 +101,7 @@ export default function SignupPage() {
 
       <p className="mt-6 text-center text-sm text-muted">
         Already have an account?{" "}
-        <Link href="/login" className="text-paper underline underline-offset-4">
+        <Link href="/login" className="text-text underline underline-offset-4">
           Log in
         </Link>
       </p>
